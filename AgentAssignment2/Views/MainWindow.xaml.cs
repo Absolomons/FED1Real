@@ -1,7 +1,7 @@
 ﻿using AgentAssignment2.ViewModels;
 using System.Windows;
 
-namespace AgentAssignment2
+namespace AgentAssignment2.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
