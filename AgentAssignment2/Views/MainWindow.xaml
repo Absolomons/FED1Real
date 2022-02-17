@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:AgentAssignment2.ViewModels"
         mc:Ignorable="d"
-        Title="AgentAssignment 1 - Lab 3" Height="450" Width="800">
+        Title="Lab 2" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
@@ -38,22 +38,23 @@
         <Button Height="23" Margin="100,212,0,0" 
                 VerticalAlignment="Top" HorizontalAlignment="Left"
                 Name="btnBack" Content="&lt;" Width="75"
-                Click="BtnBack_Click"
+                Command="{Binding PreviusCommand}"
                 />
         <Button Height="23" Margin="185,212,0,0" 
                 VerticalAlignment="Top" HorizontalAlignment="Left"
                 Name="btnForward"  Width="75"
                 Content="&gt;" 
-                Click="BtnForward_Click"
+                Command="{Binding NextCommand}"
                 />
         <Button Height="23" Margin="100,251,0,0" 
                 VerticalAlignment="Top" HorizontalAlignment="Left"
                 Width="75"
                 Name="btnAddNew" Content="Add New" 
-                Click="BtnAddNew_Click"
+                Command="{Binding AddCommand}"
                 />
         <ListBox ItemsSource="{Binding Path=Agents}" 
                  SelectedItem="{Binding Path=CurrentAgent}"
+                 SelectedIndex="{Binding Path=CurrentIndex}"
                  IsSynchronizedWithCurrentItem="True"
                  DisplayMemberPath="CodeName" 
                  Name="lbxAgents" 
