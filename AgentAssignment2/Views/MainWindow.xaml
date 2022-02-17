@@ -3,10 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AgentAssignment2"
+        xmlns:vm="clr-namespace:AgentAssignment2.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="AgentAssignment 1 - Lab 3" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="264*"></ColumnDefinition>
+            <ColumnDefinition Width="221*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Height="28" Margin="0,8,0,0" Name="label1" VerticalAlignment="Top" HorizontalAlignment="Left" >Id</Label>
+        <Label Height="28" Margin="0,37,0,0" Name="label2" VerticalAlignment="Top" HorizontalAlignment="Left" >CodeName</Label>
+        <Label Height="28" Margin="0,72,0,0" Name="label3" VerticalAlignment="Top" HorizontalAlignment="Left" >Speciality</Label>
+        <Label Height="28" Margin="0,107,0,0" Name="label4" VerticalAlignment="Top" HorizontalAlignment="Left" >Assignment</Label>
+        <TextBox Height="23" 
+                 Margin="100,10,0,0" 
+                 Name="tbxId" 
+                 VerticalAlignment="Top" 
+                 HorizontalAlignment="Left" 
+                 Width="58"
+                 Text="{Binding Path=CurrentAgent.ID}"/>
+        <TextBox Height="23" Margin="100,39,14,0" 
+                     VerticalAlignment="Top" Text="{Binding Path=CurrentAgent.CodeName}" />
+        <TextBox Height="23" Margin="100,72,14,0" VerticalAlignment="Top" 
+                     Text="{Binding Path=CurrentAgent.Speciality}"/>
+        <TextBox Margin="100,109,14,0" 
+                 Text="{Binding Path=CurrentAgent.Assignment}" 
+                 Height="82" 
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top" />
+        <Button Height="23" Margin="100,212,0,0" 
+                VerticalAlignment="Top" HorizontalAlignment="Left"
+                Name="btnBack" Content="&lt;" Width="75"
+                Click="BtnBack_Click"
+                />
+        <Button Height="23" Margin="185,212,0,0" 
+                VerticalAlignment="Top" HorizontalAlignment="Left"
+                Name="btnForward"  Width="75"
+                Content="&gt;" 
+                Click="BtnForward_Click"
+                />
+        <Button Height="23" Margin="100,251,0,0" 
+                VerticalAlignment="Top" HorizontalAlignment="Left"
+                Width="75"
+                Name="btnAddNew" Content="Add New" 
+                Click="BtnAddNew_Click"
+                />
+        <ListBox ItemsSource="{Binding Path=Agents}" 
+                 SelectedItem="{Binding Path=CurrentAgent}"
+                 IsSynchronizedWithCurrentItem="True"
+                 DisplayMemberPath="CodeName" 
+                 Name="lbxAgents" 
+                 Grid.Column="1" 
+                 Margin="9"  
+                 />
     </Grid>
 </Window>
