@@ -19,7 +19,7 @@
             assignment = aAssignment;
         }
 
-        public string ID
+        public string? ID
         {
             get
             {
@@ -31,7 +31,7 @@
             }
         }
 
-        public string CodeName
+        public string? CodeName
         {
             get
             {
@@ -43,7 +43,7 @@
             }
         }
 
-        public string Speciality
+        public string? Speciality
         {
             get
             {
@@ -55,7 +55,7 @@
             }
         }
 
-        public string Assignment
+        public string? Assignment
         {
             get
             {

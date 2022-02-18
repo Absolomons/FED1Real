@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace AgentAssignment2.ViewModels
 {
@@ -22,7 +23,7 @@ namespace AgentAssignment2.ViewModels
 
         Agent? currentAgent = null;
 
-        public Agent CurrentAgent
+        public Agent? CurrentAgent
         {
             get { return currentAgent; }
             set { SetProperty(ref currentAgent, value); }
@@ -101,6 +102,33 @@ namespace AgentAssignment2.ViewModels
             CurrentIndex = Agents.Count - 1;
         }
 
+        private DelegateCommand? deleteCommand;
+        public DelegateCommand DeleteCommand =>
+            deleteCommand ?? (deleteCommand = new DelegateCommand(ExecuteDeleteCommand, DeleteAgent_CanExecute)
+                    .ObservesProperty(() => CurrentIndex));
+
+        void ExecuteDeleteCommand()
+        {
+            if (CurrentAgent != null)
+                Agents.Remove(CurrentAgent);
+        }
+
+        private bool DeleteAgent_CanExecute()
+        {
+            if (Agents.Count > 0 && CurrentIndex >= 0)
+                return true;
+            else
+                return false;
+        }
+
+        private DelegateCommand? closeAppCommand;
+        public DelegateCommand CloseAppCommand =>
+            closeAppCommand ?? (closeAppCommand = new DelegateCommand(ExecuteCloseAppCommand));
+
+        void ExecuteCloseAppCommand()
+        {
+            Application.Current.MainWindow.Close();
+        }
         #endregion Commands
     }
 }
