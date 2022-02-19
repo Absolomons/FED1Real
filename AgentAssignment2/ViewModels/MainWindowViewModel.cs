@@ -1,22 +1,29 @@
 ﻿using AgentAssignment2.Models;
 using Prism.Commands;
 using Prism.Mvvm;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace AgentAssignment2.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
         ObservableCollection<Agent> agents = new ObservableCollection<Agent>();
+        DispatcherTimer timer = new DispatcherTimer();
 
         public MainWindowViewModel()
         {
             agents.Add(new Agent("001", "Nina", "Assassination", "UpperVolta"));
             agents.Add(new Agent("007", "James Bond", "Martinis", "North Korea"));
             CurrentAgent = agents[0];
+
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Start();
         }
 
         #region Properties
@@ -42,13 +49,16 @@ namespace AgentAssignment2.ViewModels
             set { SetProperty(ref currentIndex, value); }
         }
 
+        // No need to notify as it will never change
+        Clock clock = new Clock();
+        public Clock Clock { get => clock; set => clock = value; }
         #endregion
 
         #region Methods
 
-        public void AddNewAgent()
+        void Timer_Tick(object? sender, EventArgs e)
         {
-            agents.Add(new Agent());
+            clock.Update();
         }
 
         #endregion

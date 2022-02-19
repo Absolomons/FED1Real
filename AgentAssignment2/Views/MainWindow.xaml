@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:AgentAssignment2.ViewModels"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="Lab 4" Height="450" Width="800">
+        Title="Lab 5" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Name="mainMenu">
             <MenuItem Header="_File" >
@@ -43,6 +43,17 @@
                     Command="{Binding DeleteCommand}"
                     />
         </ToolBar>
+        <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Background="AliceBlue">
+            <StatusBarItem Content="Agents Count:" />
+            <StatusBarItem Name="sbiAgentsCount" Width="40"
+                           Content="{Binding Path=Agents.Count}" />
+            <StatusBarItem Name="sbiDateTime" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" Name="spClock">
+                    <TextBlock Margin="4,0" Name="tblkDate" Text="{Binding Path=Clock.Date}" />
+                    <TextBlock Margin="4,0" Name="tblkTime" Text="{Binding Path=Clock.Time}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="264*"></ColumnDefinition>
