@@ -43,16 +43,17 @@
         </StatusBar>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="9*"/>
+                <RowDefinition Height="68*"/>
+                <RowDefinition Height="43*"/>
+                <RowDefinition Height="264*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="264*"></ColumnDefinition>
                 <ColumnDefinition Width="221*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Height="28" Margin="0,8,0,0" Name="label1" VerticalAlignment="Top" HorizontalAlignment="Left" >Name:</Label>
-            <Label Height="28" Margin="0,37,0,0" Name="label2" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.RowSpan="2" >Debt</Label>
-           <TextBlock Height="23" 
+            <Label Height="28" Margin="0,37,0,0" Name="label2" VerticalAlignment="Top" HorizontalAlignment="Left" >Debt</Label>
+            <TextBlock Height="23" 
                  Margin="100,10,0,0" 
                  Name="tbxId" 
                  VerticalAlignment="Top" 
@@ -68,8 +69,13 @@
                      DisplayMemberPath="Name" 
                      Name="lbxDeptors" 
                      Grid.Column="1" 
-                     Margin="9,9,9,9" Grid.RowSpan="2"  
+                     Margin="9,9,9,9" Grid.RowSpan="3"  
             />
+            <DockPanel Grid.Column="0" Grid.Row="1">
+                <Label Height="28" Name="label3"  HorizontalAlignment="Left"> Add Debt</Label>
+                <TextBox Name="addDebtBox" Height="28" MinWidth="50" />
+                <Button Height="28"  Command="{Binding ClickCommand}"> Submit </Button>
+            </DockPanel>      
         </Grid>
     </DockPanel>
 </Window>

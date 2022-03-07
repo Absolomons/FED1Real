@@ -21,7 +21,7 @@ namespace DebtBook.ViewModels
             deptors.Add(new debtor("Jens Jensen", 10));
             deptors.Add(new debtor("George Freeman", -20));
             deptors.Add(new debtor("Clint Eastwood", 420));
-            deptors.Add(new debtor("Harboe Cola", 4));
+            deptors.Add(new debtor("Harboe Cola", 3.95));
 
             CurrentDeptor = deptors[0];
 
@@ -140,6 +140,16 @@ namespace DebtBook.ViewModels
             closeAppCommand ?? (closeAppCommand = new DelegateCommand(ExecuteCloseAppCommand));
 
         void ExecuteCloseAppCommand()
+        {
+            Application.Current.MainWindow.Close();
+        }
+
+
+        //FIX
+        private DelegateCommand? clickCommand;
+        public DelegateCommand ClickCommand =>
+            clickCommand ?? (clickCommand = new DelegateCommand(ExecuteClickCommand));
+        void ExcecuteClickCommand()
         {
             Application.Current.MainWindow.Close();
         }
