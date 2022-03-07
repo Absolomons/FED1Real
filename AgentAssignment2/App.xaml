@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:AgentAssignment2"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="BackgroundBrush" Color="Bisque"/>
     </Application.Resources>
 </Application>

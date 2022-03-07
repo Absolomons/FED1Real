@@ -1,4 +1,4 @@
-﻿using AgentAssignment2.Models;
+﻿using DebtBook.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -8,18 +8,21 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace AgentAssignment2.ViewModels
+namespace DebtBook.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        ObservableCollection<Agent> agents = new ObservableCollection<Agent>();
+        ObservableCollection<debtor> deptors = new ObservableCollection<debtor>();
         DispatcherTimer timer = new DispatcherTimer();
 
         public MainWindowViewModel()
         {
-            agents.Add(new Agent("001", "Nina", "Assassination", "UpperVolta"));
-            agents.Add(new Agent("007", "James Bond", "Martinis", "North Korea"));
-            CurrentAgent = agents[0];
+            deptors.Add(new debtor("Jens Jensen", 10));
+            deptors.Add(new debtor("George Freeman", -20));
+            deptors.Add(new debtor("Clint Eastwood", 420));
+            deptors.Add(new debtor("Harboe Cola", 4));
+
+            CurrentDeptor = deptors[0];
 
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += new EventHandler(Timer_Tick);
@@ -28,18 +31,18 @@ namespace AgentAssignment2.ViewModels
 
         #region Properties
 
-        Agent? currentAgent = null;
+        debtor? currentDeptor = null;
 
-        public Agent? CurrentAgent
+        public debtor? CurrentDeptor
         {
-            get { return currentAgent; }
-            set { SetProperty(ref currentAgent, value); }
+            get { return currentDeptor; }
+            set { SetProperty(ref currentDeptor, value); }
         }
 
-        public ObservableCollection<Agent> Agents
+        public ObservableCollection<debtor> Deptors
         {
-            get { return agents; }
-            set { SetProperty(ref agents, value); }
+            get { return deptors; }
+            set { SetProperty(ref deptors, value); }
         }
 
         private int currentIndex;
@@ -90,13 +93,13 @@ namespace AgentAssignment2.ViewModels
 
         void ExecuteNextCommand()
         {
-            if (CurrentIndex < (Agents.Count - 1))
+            if (CurrentIndex < (Deptors.Count - 1))
                 CurrentIndex++;
         }
 
         bool CanExecuteNextCommand()
         {
-            if (CurrentIndex < (Agents.Count - 1))
+            if (CurrentIndex < (Deptors.Count - 1))
                 return true;
             else
                 return false;
@@ -108,24 +111,24 @@ namespace AgentAssignment2.ViewModels
 
         void ExecuteAddCommand()
         {
-            Agents.Add(new Agent());
-            CurrentIndex = Agents.Count - 1;
+            Deptors.Add(new debtor());
+            CurrentIndex = Deptors.Count - 1;
         }
 
         private DelegateCommand? deleteCommand;
         public DelegateCommand DeleteCommand =>
-            deleteCommand ?? (deleteCommand = new DelegateCommand(ExecuteDeleteCommand, DeleteAgent_CanExecute)
+            deleteCommand ?? (deleteCommand = new DelegateCommand(ExecuteDeleteCommand, DeleteDeptor_CanExecute)
                     .ObservesProperty(() => CurrentIndex));
 
         void ExecuteDeleteCommand()
         {
-            if (CurrentAgent != null)
-                Agents.Remove(CurrentAgent);
+            if (CurrentDeptor != null)
+                Deptors.Remove(CurrentDeptor);
         }
 
-        private bool DeleteAgent_CanExecute()
+        private bool DeleteDeptor_CanExecute()
         {
-            if (Agents.Count > 0 && CurrentIndex >= 0)
+            if (Deptors.Count > 0 && CurrentIndex >= 0)
                 return true;
             else
                 return false;

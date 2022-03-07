@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgentAssignment2.Models
+namespace DebtBook.Models
 {
     public class Clock : BindableBase
     {

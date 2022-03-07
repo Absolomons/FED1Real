@@ -1,7 +1,7 @@
-﻿using AgentAssignment2.ViewModels;
+﻿using DebtBook.ViewModels;
 using System.Windows;
 
-namespace AgentAssignment2.Views
+namespace DebtBook.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
