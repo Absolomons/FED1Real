@@ -1,17 +1,20 @@
-﻿namespace DebtBook.Models
+﻿using System;
+using System.Collections.Generic;
+namespace DebtBook.Models
+
 {
     public class debtor
     {
         string? name;
-        double? debt;
+        List<Debt> debt = new List<Debt>();
         public debtor()
         {
         } 
 
-        public debtor(string dname, double ddebt)
+        public debtor(string dname, Debt ddebt)
         {
             name = dname;
-            debt = ddebt;
+            debt.Add(ddebt);
         }
 
         public string? Name
@@ -26,16 +29,16 @@
             }
         }
 
-        public double? Debt
-        {
-            get
-            {
-                return debt;
-            }
-            set
-            {
-                if (debt != null) debt += value;
-            }
-        }
+        //public double? Debt
+        //{
+        //    get
+        //    {
+        //        return debt;
+        //    }
+        //    set
+        //    {
+        //        if (debt != null) debt += value;
+        //    }
+        //}
     }
 }
