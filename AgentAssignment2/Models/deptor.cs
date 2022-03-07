@@ -6,17 +6,24 @@ namespace DebtBook.Models
     public class debtor
     {
         string? name;
-        List<Debt> debt = new List<Debt>();
+        List<Debt> debtList = new List<Debt>();
+        double debt;
         public debtor()
         {
         } 
 
-        public debtor(string dname, Debt ddebt)
+        public debtor(string dname, double ddebt)
         {
             name = dname;
-            debt.Add(ddebt);
+            Debt temp = new Debt(ddebt);
+            debtList.Add(temp);
         }
 
+        public void addDebt(double ddebt)
+        {
+            Debt temp = new Debt(ddebt);
+            debtList.Add(temp);
+        }
         public string? Name
         {
             get
@@ -29,16 +36,19 @@ namespace DebtBook.Models
             }
         }
 
-        //public double? Debt
-        //{
-        //    get
-        //    {
-        //        return debt;
-        //    }
-        //    set
-        //    {
-        //        if (debt != null) debt += value;
-        //    }
-        //}
+        public double? Debt
+        {
+            get
+            {
+                double? totalDebt = 0;
+                foreach(Debt d in debtList)
+                {
+                    totalDebt += d.DebtValue;
+                };
+                
+                return totalDebt;
+            }
+            
+        }
     }
 }

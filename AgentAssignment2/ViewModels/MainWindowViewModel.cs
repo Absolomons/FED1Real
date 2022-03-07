@@ -17,6 +17,7 @@ namespace DebtBook.ViewModels
 
         public MainWindowViewModel()
         {
+            
             deptors.Add(new debtor("Jens Jensen", 10));
             deptors.Add(new debtor("George Freeman", -20));
             deptors.Add(new debtor("Clint Eastwood", 420));
