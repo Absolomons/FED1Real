@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="DebitHistory.Views.SettingsDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:local="clr-namespace:DebitHistory.Views"
+             xmlns:localval="clr-namespace:DebitHistory.ViewModels.Validationrules"
+             mc:Ignorable="d" 
+             d:DesignHeight="240" d:DesignWidth="400" 
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Height="240"
+             Width="400"
+             FocusManager.FocusedElement="{Binding ElementName=reportFolderTextBox}"
+             >
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="5,2" />
+        </Style>
+        <SolidColorBrush x:Key="reportBrush" Color="{Binding Report.ReportColor}" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- 1st row: report folder setting  -->
+        <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=reportFolderTextBox}">Report _Folder</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="reportFolderTextBox"
+      ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}">
+            <TextBox.Text>
+                <Binding Path="Report.ReportFolder">
+                    <Binding.ValidationRules>
+                        <localval:FolderMustExist />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Button Grid.Row="0" Grid.Column="2" Name="folderBrowseButton">...</Button>
+
+        <!-- 2nd row: report color setting -->
+        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" 
+                Background="{DynamicResource reportBrush}"
+                Command="{Binding Path=ReportColorCommand}"
+                Content="Report _Color..."
+                />
+
+        <!-- 3rd row: reporter setting -->
+        <Label Grid.Row="2" Grid.Column="0" Target="{Binding ElementName=reporterTextBox}"
+               Content="_Reporter" />
+        <TextBox Grid.Row="2" Grid.Column="1" Name="reporterTextBox"
+            ToolTip="{Binding RelativeSource={RelativeSource Self}, 
+            Path=(Validation.Errors)[0].ErrorContent}">
+            <TextBox.Text>
+                <Binding Path="Report.Reporter">
+                    <Binding.ValidationRules>
+                        <localval:NonZeroLength />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!-- 4th row: buttons -->
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Command="{Binding CloseDialogCommand}" CommandParameter="true" 
+                    Width="72" IsDefault="True">Ok</Button>
+            <Button Name="cancelButton" Width="72" IsCancel="True">Cancel</Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

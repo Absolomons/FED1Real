@@ -29,6 +29,11 @@
                     Content="+" 
                     Command="{Binding AddCommand}"
                     />
+            <Button ToolTip="Save data"
+                    Content="Save" 
+                    FontSize="16"
+                    
+            />
         </ToolBar>
         <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Background="AliceBlue">
             <StatusBarItem Content="Debtor Count:" />
@@ -45,7 +50,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="68*"/>
                 <RowDefinition Height="43*"/>
-                <RowDefinition Height="264*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="43*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="264*"></ColumnDefinition>
@@ -73,9 +79,10 @@
             />
             <DockPanel Grid.Column="0" Grid.Row="1">
                 <Label Height="28" Name="label3"  HorizontalAlignment="Left"> Add Debt</Label>
-                <TextBox Name="addDebtBox" Height="28" MinWidth="50" />
+                <TextBox Text="{Binding Debtbox}" Name="addDebtBox" Height="28" MinWidth="50" />
                 <Button Height="28"  Command="{Binding ClickCommand}"> Submit </Button>
-            </DockPanel>      
+            </DockPanel>
+            <Button Grid.Row="2" MaxHeight="50" Margin="10" Command="{Binding HistoryCommand}">View History</Button>
         </Grid>
     </DockPanel>
 </Window>

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
+using Microsoft.VisualBasic;
 
 namespace DebtBook.ViewModels
 {
@@ -52,6 +53,18 @@ namespace DebtBook.ViewModels
             get { return currentIndex; }
             set { SetProperty(ref currentIndex, value); }
         }
+
+        private double debtbox;
+
+        public double Debtbox
+        {
+            get { return this.debtbox; }
+            set { debtbox = Convert.ToDouble(value); }
+
+        }
+
+
+
 
         // No need to notify as it will never change
         Clock clock = new Clock();
@@ -145,13 +158,20 @@ namespace DebtBook.ViewModels
         }
 
 
-        //FIX
-        private DelegateCommand? clickCommand;
-        public DelegateCommand ClickCommand =>
-            clickCommand ?? (clickCommand = new DelegateCommand(ExecuteClickCommand));
-        void ExcecuteClickCommand()
+        private DelegateCommand clickCommand;
+        public DelegateCommand ClickCommand => clickCommand ?? (clickCommand = new DelegateCommand(ExecuteClickCommand));
+        void ExecuteClickCommand()
         {
-            Application.Current.MainWindow.Close();
+            currentDeptor.addDebt(debtbox);
+        }
+
+
+        private DelegateCommand historyCommand;
+        public DelegateCommand HistoryCommand => historyCommand ?? (historyCommand = new DelegateCommand(ExecuteHistoryCommand));
+        void ExecuteHistoryCommand()
+        {
+
+            currentDeptor.addDebt(debtbox);
         }
         #endregion Commands
     }

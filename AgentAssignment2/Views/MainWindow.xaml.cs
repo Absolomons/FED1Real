@@ -10,7 +10,7 @@ namespace DebtBook.Views
     {
         public MainWindow()
         {
-            InitializeComponent()
+            InitializeComponent();
         }
 
        
