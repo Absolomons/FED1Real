@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DebitHistory.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace DebitHistory.Views
 {
     /// <summary>
-    /// Interaction logic for SettingsDialog.xaml
+    /// Interaction logic for AgentView.xaml
     /// </summary>
-    public partial class SettingsDialog : UserControl
+    public partial class DebitHistoryView : Window
     {
-        public SettingsDialog()
+        public DebitHistoryView()
         {
             InitializeComponent();
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 namespace DebtBook.Models
-
 {
     public class debtor
     {
@@ -10,7 +9,12 @@ namespace DebtBook.Models
         double debt;
         public debtor()
         {
-        } 
+        }
+
+        public debtor Clone()
+        {
+            return this.MemberwiseClone() as debtor;
+        }
 
         public debtor(string dname, double ddebt)
         {
