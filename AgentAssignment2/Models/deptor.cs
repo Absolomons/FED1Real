@@ -57,7 +57,8 @@ namespace DebtBook.Models
 
         public List<Debt> DebtList
         {
-            get;
+            get { return debtList; }
+          
 
         }
 

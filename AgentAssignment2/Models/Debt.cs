@@ -3,8 +3,8 @@ namespace DebtBook.Models
 {
     public class Debt
     {
-        string? date;
-        double? debtValue;
+        private string? date;
+        private double? debtValue;
         public Debt()
         {
         } 
@@ -21,6 +21,12 @@ namespace DebtBook.Models
             get { return debtValue; }
             
         }
-       
+        public string? Date
+        {
+
+            get { return date; }
+
+        }
+
     }
 }
