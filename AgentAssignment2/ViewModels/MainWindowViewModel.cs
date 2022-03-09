@@ -126,7 +126,20 @@ namespace DebtBook.ViewModels
 
         void ExecuteAddCommand()
         {
-            
+
+            var vm = new AddViewModel(deptors)
+            {
+                //Specialities = specialities
+            };
+            var dlg = new AddView
+            {
+                DataContext = vm,
+                Owner = Application.Current.MainWindow
+            };
+            if (dlg.ShowDialog() == true)
+            {
+
+            }
         }
 
         private DelegateCommand? deleteCommand;
