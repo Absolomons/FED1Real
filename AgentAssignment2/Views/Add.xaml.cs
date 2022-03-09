@@ -15,14 +15,21 @@ using System.Windows.Shapes;
 
 namespace DebtBook.Views
 {
-    /// <summary>
-    /// Interaction logic for AgentView.xaml
-    /// </summary>
+
     public partial class AddView : Window
     {
         public AddView()
         {
             InitializeComponent();
+        }
+
+        private void btnOk_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as AddViewModel;
+            if (vm.IsValid)
+                DialogResult = true;
+            else
+                MessageBox.Show("Enter values for Name and Initial debt amount", "Missing data");
         }
     }
 }

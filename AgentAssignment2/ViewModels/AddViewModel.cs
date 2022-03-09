@@ -8,33 +8,58 @@ namespace DebtBook.ViewModels
 {
     public class AddViewModel : BindableBase
     {
-        private ObservableCollection<debtor> debtorCopy;
-        private string name;
-        private double debt;
-        public AddViewModel(ObservableCollection<debtor> deptors)
+        public AddViewModel(debtor debtor)
         {
-            debtorCopy = deptors;
-            Title = "Add new debtor";
+            CurrentDebtor = debtor;
         }
 
-        #region Properties
-        string title;
 
-        public string Title
+        debtor currentDebtor;
+
+        public debtor CurrentDebtor
         {
-            get { return title; }
-            set
+            get { return currentDebtor; }
+            set { SetProperty(ref currentDebtor, value); }
+        }
+
+        bool isValid;
+
+        public bool IsValid
+        {
+            get
             {
-                SetProperty(ref title, value);
+                bool isValid = true;
+                if (string.IsNullOrWhiteSpace(CurrentDebtor.Name))
+                    isValid = false;
+                return isValid;
+            }
+            //set
+            //{
+            //    SetProperty(ref isValid, value);
+            //}
+        }
+
+        ICommand _okBtnCommand;
+
+        public ICommand OkBtnCommand
+        {
+            get
+            {
+                return _okBtnCommand ??= new DelegateCommand(
+                        OkBtnCommand_Execute, OkBtnCommand_CanExecute)
+                    .ObservesProperty(() => CurrentDebtor.Name)
+                    .ObservesProperty(() => CurrentDebtor.Debt);
             }
         }
-        public string Name { get; set; }
-        public double Debt { get { return debt; }}
+
+        private void OkBtnCommand_Execute()
+        {
+            // No action here - is handled i code behind
+        }
+
+        private bool OkBtnCommand_CanExecute()
+        {
+            return IsValid;
+        }
     }
-
-
-
-        #endregion
-
-    
 }

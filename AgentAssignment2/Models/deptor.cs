@@ -5,6 +5,7 @@ namespace DebtBook.Models
     public class debtor
     {
         string? name;
+        double? debt;
         public debtor()
         {
         }
@@ -49,6 +50,11 @@ namespace DebtBook.Models
                 };
                 
                 return totalDebt;
+            }
+            set
+            {
+                Debt temp = new Debt(value);
+                debtList.Add(temp);
             }
             
         }

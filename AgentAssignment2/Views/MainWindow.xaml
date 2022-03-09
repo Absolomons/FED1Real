@@ -32,7 +32,12 @@
             <Button ToolTip="Save data"
                     Content="Save" 
                     FontSize="16"
-                    
+                    Command="{Binding SaveAsCommand}"
+            />
+            <Button ToolTip="Open"
+                    Content="Open" 
+                    FontSize="16"
+                    Command="{Binding OpenFileCommand}"
             />
         </ToolBar>
         <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Background="AliceBlue">

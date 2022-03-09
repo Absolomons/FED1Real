@@ -9,7 +9,7 @@ namespace DebtBook.Models
         {
         } 
 
-        public Debt(double ddebt)
+        public Debt(double? ddebt)
         {
             date = DateTime.Now.ToLongTimeString();
             debtValue = ddebt;

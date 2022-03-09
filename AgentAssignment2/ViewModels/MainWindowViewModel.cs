@@ -5,10 +5,14 @@ using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
+using DebitHistory;
+using DebtBook.Data;
 using Microsoft.VisualBasic;
+using Microsoft.Win32;
 
 namespace DebtBook.ViewModels
 {
@@ -16,6 +20,7 @@ namespace DebtBook.ViewModels
     {
         ObservableCollection<debtor> deptors = new ObservableCollection<debtor>();
         DispatcherTimer timer = new DispatcherTimer();
+        private string filePath = "";
 
         public MainWindowViewModel()
         {
@@ -36,6 +41,16 @@ namespace DebtBook.ViewModels
 
         debtor? currentDeptor = null;
 
+        private string filename = "";
+        public string Filename
+        {
+            get { return filename; }
+            set
+            {
+                SetProperty(ref filename, value);
+                RaisePropertyChanged("Title");
+            }
+        }
         public debtor? CurrentDeptor
         {
             get { return currentDeptor; }
@@ -126,8 +141,8 @@ namespace DebtBook.ViewModels
 
         void ExecuteAddCommand()
         {
-
-            var vm = new AddViewModel(deptors)
+            var debtor = new debtor();
+            var vm = new AddViewModel(debtor)
             {
                 //Specialities = specialities
             };
@@ -138,7 +153,8 @@ namespace DebtBook.ViewModels
             };
             if (dlg.ShowDialog() == true)
             {
-
+                Deptors.Add(debtor);
+                CurrentDeptor = debtor; // Or CurrentIndex = Agents.Count - 1;
             }
         }
 
@@ -199,6 +215,78 @@ namespace DebtBook.ViewModels
 
             }
         }
+        DelegateCommand _SaveAsCommand;
+        public DelegateCommand SaveAsCommand
+        {
+            get { return _SaveAsCommand ?? (_SaveAsCommand = new DelegateCommand(SaveAsCommand_Execute)); }
+        }
+
+        private void SaveAsCommand_Execute()
+        {
+            var dialog = new SaveFileDialog
+            {
+                Filter = "Agent assignment documents|*.agn|All Files|*.*",
+                DefaultExt = "agn"
+            };
+            if (filePath == "")
+                dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            else
+                dialog.InitialDirectory = Path.GetDirectoryName(filePath);
+
+            if (dialog.ShowDialog(App.Current.MainWindow) == true)
+            {
+                filePath = dialog.FileName;
+                Filename = Path.GetFileName(filePath);
+                SaveFile();
+            }
+        }
+
+        private void SaveFile()
+        {
+            try
+            {
+                Repository.SaveFile(filePath, deptors);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unable to save file", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+        DelegateCommand _OpenFileCommand;
+        public DelegateCommand OpenFileCommand
+        {
+            get { return _OpenFileCommand ?? (_OpenFileCommand = new DelegateCommand(OpenFileCommand_Execute)); }
+        }
+
+        private void OpenFileCommand_Execute()
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Agent assignment documents|*.agn|All Files|*.*",
+                DefaultExt = "agn"
+            };
+            if (filePath == "")
+                dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            else
+                dialog.InitialDirectory = Path.GetDirectoryName(filePath);
+
+            if (dialog.ShowDialog(App.Current.MainWindow) == true)
+            {
+                filePath = dialog.FileName;
+                Filename = Path.GetFileName(filePath);
+                try
+                {
+                    Deptors = Repository.ReadFile(filePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Unable to open file", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
         #endregion Commands
     }
 }
