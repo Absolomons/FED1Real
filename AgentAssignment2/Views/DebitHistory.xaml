@@ -1,13 +1,14 @@
-﻿<Window x:Class="Debtbook.Views.DebitHistory"
+﻿<Window x:Class="DebtBook.Views.DebitHistoryView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DebitHistory.Views"
+        xmlns:mvvm="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Height="300" Width="150"
+        Height="300" Width="250"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
+        mvvm:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Path=Title}" 
         >
     <Grid>
@@ -19,6 +20,12 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Label Margin="5,0" >Debt:</Label>
-        
+        <ListBox Grid.Row="1" ItemsSource="{Binding Path=CurrentDebtor.DebtList}" 
+                 IsSynchronizedWithCurrentItem="True"
+                 DisplayMemberPath="Name" 
+                 Name="lbxDeptors"
+                 Grid.Column="1" 
+                 Margin="9,9,9,9" Grid.RowSpan="3" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="lbxDeptors_SelectionChanged"
+        />
     </Grid>
 </Window>

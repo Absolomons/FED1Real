@@ -36,6 +36,8 @@ namespace DebtBook.ViewModels
             }
         }
 
+
+
         #endregion
 
     }

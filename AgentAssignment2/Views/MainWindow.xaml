@@ -68,14 +68,14 @@
                  Text="{Binding Path=CurrentDeptor.Name}"/>
             <TextBlock Height="23" Margin="100,39,14,0" 
                      VerticalAlignment="Top" Text="{Binding Path=CurrentDeptor.Debt}" />
-            <ListBox ItemsSource="{Binding Path=CurrentDebtor}" 
+            <ListBox ItemsSource="{Binding Path=Deptors}" 
                      SelectedItem="{Binding Path=CurrentDeptor}"
                      SelectedIndex="{Binding Path=CurrentIndex}"
                      IsSynchronizedWithCurrentItem="True"
                      DisplayMemberPath="Name" 
                      Name="lbxDeptors"
                      Grid.Column="1" 
-                     Margin="9,9,9,9" Grid.RowSpan="3"  
+                     Margin="9,9,9,9" Grid.RowSpan="3"
             />
             <DockPanel Grid.Column="0" Grid.Row="1">
                 <Label Height="28" Name="label3"  HorizontalAlignment="Left"> Add Debt</Label>

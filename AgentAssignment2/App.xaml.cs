@@ -8,11 +8,7 @@ using System.Windows;
 
 namespace DebitHistory
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-
     }
 }

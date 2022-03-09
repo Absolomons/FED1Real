@@ -5,8 +5,6 @@ namespace DebtBook.Models
     public class debtor
     {
         string? name;
-        List<Debt> debtList = new List<Debt>();
-        double debt;
         public debtor()
         {
         }
@@ -54,5 +52,14 @@ namespace DebtBook.Models
             }
             
         }
+
+        List<Debt> debtList = new List<Debt>();
+
+        public List<Debt> DebtList
+        {
+            get;
+
+        }
+
     }
 }

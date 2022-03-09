@@ -1,6 +1,5 @@
 ﻿using DebtBook.Models;
 using DebtBook.Views;
-using DebitHistory.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -127,25 +126,7 @@ namespace DebtBook.ViewModels
 
         void ExecuteAddCommand()
         {
-            var tempDebtor = CurrentDeptor.Clone();
-            var vm = new DebtBookViewModel(tempDebtor)
-            {
-                //Specialities = specialities
-            };
-            var dlg = new DebtBookView
-            {
-                DataContext = vm,
-                Owner = Application.Current.MainWindow
-            };
-            if (dlg.ShowDialog() == true)
-            {
-                // Copy values back
-                CurrentAgent.ID = tempAgent.ID;
-                CurrentAgent.CodeName = tempAgent.CodeName;
-                CurrentAgent.Speciality = tempAgent.Speciality;
-                CurrentAgent.Assignment = tempAgent.Assignment;
-                Dirty = true;
-            }
+            
         }
 
         private DelegateCommand? deleteCommand;
@@ -190,7 +171,20 @@ namespace DebtBook.ViewModels
         void ExecuteHistoryCommand()
         {
 
-            currentDeptor.addDebt(debtbox);
+            var tempDebtor = CurrentDeptor.Clone();
+            var vm = new DebtBookViewModel(tempDebtor)
+            {
+                //Specialities = specialities
+            };
+            var dlg = new DebitHistoryView
+            {
+                DataContext = vm,
+                Owner = Application.Current.MainWindow
+            };
+            if (dlg.ShowDialog() == true)
+            {
+
+            }
         }
         #endregion Commands
     }
