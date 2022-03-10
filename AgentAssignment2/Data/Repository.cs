@@ -13,6 +13,11 @@ namespace DebtBook.Data
             TextReader reader = new StreamReader(fileName);
             var debtors = (ObservableCollection<debtor>)serializer.Deserialize(reader);
             reader.Close();
+            /*foreach (var deptor in debtors)
+            {
+                deptor.DebtList.RemoveAt(0);
+            }
+            */
             return debtors;
         }
         internal static void SaveFile(string fileName, ObservableCollection<debtor> agents)

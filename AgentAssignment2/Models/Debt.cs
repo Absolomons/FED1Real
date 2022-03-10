@@ -19,12 +19,14 @@ namespace DebtBook.Models
         { 
             
             get { return debtValue; }
+            set { debtValue = value; }
             
         }
         public string? Date
         {
 
             get { return date; }
+            set { date = value; }
 
         }
 

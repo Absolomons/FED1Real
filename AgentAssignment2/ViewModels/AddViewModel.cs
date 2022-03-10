@@ -33,10 +33,6 @@ namespace DebtBook.ViewModels
                     isValid = false;
                 return isValid;
             }
-            //set
-            //{
-            //    SetProperty(ref isValid, value);
-            //}
         }
 
         ICommand _okBtnCommand;

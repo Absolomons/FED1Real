@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+
 namespace DebtBook.Models
 {
     public class debtor
     {
         string? name;
-        double? debt;
         public debtor()
         {
         }
@@ -51,12 +53,6 @@ namespace DebtBook.Models
                 
                 return totalDebt;
             }
-            set
-            {
-                Debt temp = new Debt(value);
-                debtList.Add(temp);
-            }
-            
         }
 
         List<Debt> debtList = new List<Debt>();
@@ -64,8 +60,8 @@ namespace DebtBook.Models
         public List<Debt> DebtList
         {
             get { return debtList; }
-          
 
+            set { debtList = value; }
         }
 
     }

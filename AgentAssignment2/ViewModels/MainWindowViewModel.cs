@@ -25,10 +25,10 @@ namespace DebtBook.ViewModels
         public MainWindowViewModel()
         {
             
-            deptors.Add(new debtor("Jens Jensen", 10));
-            deptors.Add(new debtor("George Freeman", -20));
-            deptors.Add(new debtor("Clint Eastwood", 420));
-            deptors.Add(new debtor("Harboe Cola", 3.95));
+            deptors.Add(new debtor("Jens Jensen", 0));
+            //deptors.Add(new debtor("George Freeman", -20));
+            //deptors.Add(new debtor("Clint Eastwood", 420));
+            //deptors.Add(new debtor("Harboe Cola", 3.95));
 
             CurrentDeptor = deptors[0];
 
@@ -75,11 +75,13 @@ namespace DebtBook.ViewModels
         public double Debtbox
         {
             get { return this.debtbox; }
-            set { debtbox = Convert.ToDouble(value); }
+            set
+            {
+                double temp = Convert.ToDouble(value);
+                SetProperty(ref debtbox, temp);
+            }
 
         }
-
-
 
 
         // No need to notify as it will never change
@@ -158,25 +160,6 @@ namespace DebtBook.ViewModels
             }
         }
 
-        private DelegateCommand? deleteCommand;
-        public DelegateCommand DeleteCommand =>
-            deleteCommand ?? (deleteCommand = new DelegateCommand(ExecuteDeleteCommand, DeleteDeptor_CanExecute)
-                    .ObservesProperty(() => CurrentIndex));
-
-        void ExecuteDeleteCommand()
-        {
-            if (CurrentDeptor != null)
-                Deptors.Remove(CurrentDeptor);
-        }
-
-        private bool DeleteDeptor_CanExecute()
-        {
-            if (Deptors.Count > 0 && CurrentIndex >= 0)
-                return true;
-            else
-                return false;
-        }
-
         private DelegateCommand? closeAppCommand;
         public DelegateCommand CloseAppCommand =>
             closeAppCommand ?? (closeAppCommand = new DelegateCommand(ExecuteCloseAppCommand));
@@ -192,6 +175,8 @@ namespace DebtBook.ViewModels
         void ExecuteClickCommand()
         {
             currentDeptor.addDebt(debtbox);
+            Debtbox = 0.0;
+            RaisePropertyChanged("CurrentDeptor");
         }
 
 
