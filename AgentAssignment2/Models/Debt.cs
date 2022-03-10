@@ -4,18 +4,18 @@ namespace DebtBook.Models
     public class Debt
     {
         private string? date;
-        private double? debtValue;
+        private double debtValue;
         public Debt()
         {
         } 
 
-        public Debt(double? ddebt)
+        public Debt(double ddebt)
         {
             date = DateTime.Now.ToLongTimeString();
             debtValue = ddebt;
         }
 
-        public double? DebtValue 
+        public double DebtValue 
         { 
             
             get { return debtValue; }

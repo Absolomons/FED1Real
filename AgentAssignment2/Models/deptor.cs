@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 
 namespace DebtBook.Models
@@ -8,6 +9,7 @@ namespace DebtBook.Models
     public class debtor
     {
         string? name;
+        double debt;
         public debtor()
         {
         }
@@ -41,11 +43,11 @@ namespace DebtBook.Models
             }
         }
 
-        public double? Debt
+        public double Debt
         {
             get
             {
-                double? totalDebt = 0;
+                double totalDebt = 0;
                 foreach(Debt d in debtList)
                 {
                     totalDebt += d.DebtValue;
@@ -53,6 +55,7 @@ namespace DebtBook.Models
                 
                 return totalDebt;
             }
+            set { addDebt(value); }
         }
 
         List<Debt> debtList = new List<Debt>();
