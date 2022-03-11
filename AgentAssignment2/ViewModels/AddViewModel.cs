@@ -28,7 +28,7 @@ namespace DebtBook.ViewModels
         {
             get
             {
-                bool isValid = true;
+                isValid = true;
                 if (string.IsNullOrWhiteSpace(CurrentDebtor.Name))
                     isValid = false;
                 return isValid;

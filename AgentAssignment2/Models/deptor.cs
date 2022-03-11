@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DebtBook.Models
 {
-    public class debtor
+    public class debtor : INotifyPropertyChanged
     {
         string? name;
         double debt;
@@ -40,6 +40,7 @@ namespace DebtBook.Models
             set
             {
                 name = value;
+                
             }
         }
 
@@ -55,7 +56,9 @@ namespace DebtBook.Models
                 
                 return totalDebt;
             }
-            set { addDebt(value); }
+            set {
+                addDebt(value);
+            }
         }
 
         List<Debt> debtList = new List<Debt>();
@@ -67,5 +70,14 @@ namespace DebtBook.Models
             set { debtList = value; }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
     }
+
 }
