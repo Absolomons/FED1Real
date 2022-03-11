@@ -4,14 +4,10 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
-using DebitHistory;
 using DebtBook.Data;
-using Microsoft.VisualBasic;
 using Microsoft.Win32;
 
 namespace DebtBook.ViewModels
@@ -26,9 +22,9 @@ namespace DebtBook.ViewModels
         {
             
             deptors.Add(new debtor("Jens Jensen", 0));
-            //deptors.Add(new debtor("George Freeman", -20));
-            //deptors.Add(new debtor("Clint Eastwood", 420));
-            //deptors.Add(new debtor("Harboe Cola", 3.95));
+            deptors.Add(new debtor("George Freeman", -20));
+            deptors.Add(new debtor("Clint Eastwood", 420));
+            deptors.Add(new debtor("Harboe Cola", 3.95));
 
             CurrentDeptor = deptors[0];
 
@@ -146,7 +142,7 @@ namespace DebtBook.ViewModels
             var debtor = new debtor();
             var vm = new AddViewModel(debtor)
             {
-                //Specialities = specialities
+                
             };
             var dlg = new AddView
             {
@@ -156,7 +152,7 @@ namespace DebtBook.ViewModels
             if (dlg.ShowDialog() == true)
             {
                 Deptors.Add(debtor);
-                CurrentDeptor = debtor; // Or CurrentIndex = Agents.Count - 1;
+                CurrentDeptor = debtor;
             }
         }
 
@@ -188,7 +184,7 @@ namespace DebtBook.ViewModels
             var tempDebtor = CurrentDeptor.Clone();
             var vm = new DebtBookViewModel(tempDebtor)
             {
-                //Specialities = specialities
+             
             };
             var dlg = new DebitHistoryView
             {
@@ -210,8 +206,8 @@ namespace DebtBook.ViewModels
         {
             var dialog = new SaveFileDialog
             {
-                Filter = "Agent assignment documents|*.agn|All Files|*.*",
-                DefaultExt = "agn"
+                Filter = "Debt documents|*.dbt|All Files|*.*",
+                DefaultExt = "dbt"
             };
             if (filePath == "")
                 dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -249,8 +245,8 @@ namespace DebtBook.ViewModels
         {
             var dialog = new OpenFileDialog
             {
-                Filter = "Agent assignment documents|*.agn|All Files|*.*",
-                DefaultExt = "agn"
+                Filter = "Debt documents|*.dbt|All Files|*.*",
+                DefaultExt = "dbt"
             };
             if (filePath == "")
                 dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

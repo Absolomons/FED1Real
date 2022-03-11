@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Prism.Mvvm;
 
 namespace DebtBook.Models
@@ -71,14 +67,7 @@ namespace DebtBook.Models
             set { debtList = value; }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChanged(String info)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
+      
     }
 
 }

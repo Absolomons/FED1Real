@@ -1,7 +1,6 @@
 ﻿using DebtBook.Models;
 using Prism.Commands;
 using Prism.Mvvm;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace DebtBook.ViewModels

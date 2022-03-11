@@ -8,7 +8,7 @@
         Height="200" Width="270"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
-        Title="Add an Agent!" 
+        Title="Add a Debtor!" 
         >
     <Window.Resources>
         <ResourceDictionary>
