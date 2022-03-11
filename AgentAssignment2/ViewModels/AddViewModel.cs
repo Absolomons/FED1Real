@@ -22,13 +22,13 @@ namespace DebtBook.ViewModels
             set { SetProperty(ref currentDebtor, value); }
         }
 
-        bool isValid;
+        
 
         public bool IsValid
         {
             get
             {
-                isValid = true;
+                bool isValid = true;
                 if (string.IsNullOrWhiteSpace(CurrentDebtor.Name))
                     isValid = false;
                 return isValid;
@@ -41,10 +41,10 @@ namespace DebtBook.ViewModels
         {
             get
             {
-                return _okBtnCommand ??= new DelegateCommand(
+                return _okBtnCommand ?? (_okBtnCommand = new DelegateCommand(
                         OkBtnCommand_Execute, OkBtnCommand_CanExecute)
                     .ObservesProperty(() => CurrentDebtor.Name)
-                    .ObservesProperty(() => CurrentDebtor.Debt);
+                    .ObservesProperty(() => CurrentDebtor.Debt));
             }
         }
 

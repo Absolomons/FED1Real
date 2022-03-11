@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using Prism.Mvvm;
 
 namespace DebtBook.Models
 {
-    public class debtor : INotifyPropertyChanged
+    public class debtor : BindableBase
     {
         string? name;
         double debt;
@@ -39,8 +40,8 @@ namespace DebtBook.Models
             }
             set
             {
-                name = value;
-                
+                SetProperty(ref name, value);
+
             }
         }
 
